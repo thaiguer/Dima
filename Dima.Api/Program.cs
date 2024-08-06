@@ -1,14 +1,20 @@
 var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(x => x.CustomSchemaIds(n => n.FullName));
+builder.Services.AddTransient<Handler>();
 
-app.MapGet("/", () => "caraca!");
+var app = builder.Build();
+app.UseSwagger();
+app.UseSwaggerUI();
+
+app.MapGet("/", () => "It's alive.");
+
 app.MapPost(
     "/v1/transactions",
-    () => new Response
-    {
-        Id = 2,
-        Title = "alguma coisa"
-    })
+    (Request request, Handler handler)
+        => handler.Handle(request))
+    .WithName("Transactions: Create")
+    .WithSummary("Cria uma nova transação")
     .Produces<Response>();
 
 app.Run();
@@ -27,4 +33,12 @@ public class Response()
 {
     public long Id { get; set; }
     public string Title { get; set; } = string.Empty;
+}
+
+public class Handler
+{
+    public Response Handle(Request request)
+    {
+        return new Response();
+    }
 }
