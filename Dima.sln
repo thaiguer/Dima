@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dima.Core", "Dima.Core\Dima.Core.csproj", "{2699AD6A-A0F7-44FC-9159-B72880D9B304}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dima.Api", "Dima.Api\Dima.Api.csproj", "{F9D95902-BE53-4E2C-860E-767772550593}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{2699AD6A-A0F7-44FC-9159-B72880D9B304}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2699AD6A-A0F7-44FC-9159-B72880D9B304}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2699AD6A-A0F7-44FC-9159-B72880D9B304}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9D95902-BE53-4E2C-860E-767772550593}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9D95902-BE53-4E2C-860E-767772550593}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9D95902-BE53-4E2C-860E-767772550593}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9D95902-BE53-4E2C-860E-767772550593}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
