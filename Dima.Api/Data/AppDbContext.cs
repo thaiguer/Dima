@@ -13,6 +13,6 @@ public class AppDbContext : DbContext
     {
         //gonna search for classes that implement IEntityTypeConfiguration
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-        //Server=localhost,1433;Database=balta;User ID=sa;Password=1q2w3e4r@#$;Trusted_Connection=False; TrustServerCertificate=True;
+        //Server=localhost,1433;Database=dima-dev;User ID=sa;Password=1q2w3e4r@#$;Trusted_Connection=False; TrustServerCertificate=True;
     }
 }
