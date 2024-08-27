@@ -2,7 +2,7 @@
 
 namespace Dima.Core.Responses;
 
-internal class Response<TData>
+public class Response<TData>
 {
     private readonly int _code;
 
