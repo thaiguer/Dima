@@ -14,8 +14,8 @@ public static class Health
             return $"The database has {isRunning} Categories stored";
         }
         catch (Exception ex)
-        {
-            return ex.Message;
+        {   
+            return ex.Message.Replace("SQL Server", "database server");
         }
     }
     
