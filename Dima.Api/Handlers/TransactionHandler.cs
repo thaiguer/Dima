@@ -1,4 +1,5 @@
 ﻿using Dima.Api.Data;
+using Dima.Core.Common.Extensions;
 using Dima.Core.Enums;
 using Dima.Core.Handlers;
 using Dima.Core.Models;
@@ -14,14 +15,16 @@ public class TransactionHandler (AppDbContext appDbContext): ITransactionHandler
     {
         try
         {
-            var transaction = new Transaction();
-            transaction.Title = request.Title;
-            transaction.Type = request.Type;
-            transaction.PaidOrReceivedAt = request.PaidOrReceivedAt;
-            transaction.Amount = request.Amount;
-            transaction.CreatedAt = DateTime.UtcNow;
-            transaction.CategoryId = request.CategoryId;
-            transaction.UserId = request.UserId;
+            var transaction = new Transaction
+            {
+                Title = request.Title,
+                Type = request.Type,
+                PaidOrReceivedAt = request.PaidOrReceivedAt,
+                Amount = request.Amount,
+                CreatedAt = DateTime.UtcNow,
+                CategoryId = request.CategoryId,
+                UserId = request.UserId
+            };
 
             await appDbContext.Transactions.AddAsync(transaction);
             await appDbContext.SaveChangesAsync();
@@ -98,5 +101,37 @@ public class TransactionHandler (AppDbContext appDbContext): ITransactionHandler
         }
     }
 
-    Task<PagedResponse<List<Transaction>>> GetAllAsync(GetTransactionsByPeriodRequest request);
+    public async Task<PagedResponse<List<Transaction>>> GetAllAsync(GetTransactionsByPeriodRequest request)
+    {
+        try
+        {
+            request.Start ??= DateTime.Now.GetFirstDay();
+            request.Finish ??= DateTime.Now.GetLastDay();
+
+            var query = appDbContext
+                .Transactions
+                .AsNoTracking()
+                .Where(x =>
+                    x.UserId == request.UserId &&
+                    x.PaidOrReceivedAt >= request.Start &&
+                    x.PaidOrReceivedAt <= request.Finish)
+                .OrderByDescending(x => x.PaidOrReceivedAt);
+
+            var transactions = await query
+                .Skip(request.PageSize * (request.PageNumber - 1))
+                .Take(request.PageSize)
+                .ToListAsync();
+
+            var count = await query.CountAsync();
+            var response = new PagedResponse<List<Transaction>>(transactions, count, request.PageNumber, request.PageSize)
+            {
+                Message = count >= 1 ? $"There are {count} transactions in the database" : "There are no transactions in the database"
+            };
+            return response;
+        }
+        catch
+        {
+            return new PagedResponse<List<Transaction>>(null, 500, "Impossible to get transactions");
+        }
+    }
 }
