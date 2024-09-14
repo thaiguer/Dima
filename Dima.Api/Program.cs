@@ -5,6 +5,7 @@ using Dima.Api.Handlers;
 using Dima.Api.Endpoints;
 using Dima.Api.Common.Api;
 using Microsoft.AspNetCore.Identity;
+using Dima.Api.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,11 @@ var connectionString = builder.
     GetConnectionString("DefaultConnection") ?? string.Empty;
 
 builder.Services.AddDbContext<AppDbContext>(x => { x.UseSqlServer(connectionString); });
+builder.Services
+    .AddIdentityCore<User>()
+    .AddRoles<IdentityRole<long>>()
+    .AddEntityFrameworkStores<AppDbContext>()
+    .AddApiEndpoints();
 
 builder.Services.AddTransient<ICategoryHandler, CategoryHandler>();
 builder.Services.AddTransient<ITransactionHandler, TransactionHandler>();
