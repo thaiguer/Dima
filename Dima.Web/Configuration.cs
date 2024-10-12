@@ -5,11 +5,11 @@ namespace Dima.Web;
 
 public static class Configuration
 {
-    public static bool IsDarkMode = false;
+    public static bool IsDarkMode = true;
 
     public const string HttpClientName = "dima";
 
-    public static string BackendUrl { get; set; } = "http://localhost:7119";
+    public static string BackendUrl { get; set; } = "https://localhost:7119";
 
     public static MudTheme Theme = new()
     {

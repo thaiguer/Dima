@@ -1,5 +1,5 @@
 ﻿@page "/register"
-@layout HedlessLayout
+@layout HeadlessLayout
 @using Microsoft.AspNetCore.Components.Web
 @inherits RegisterPage
 
@@ -11,6 +11,7 @@
             <div class="d-flex justify-center">
                 <img src="imgs/dima.png" alt="" width="200" />
             </div>
+            <p>Register</p>
             <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
                 <DataAnnotationsValidator/>
                 @* <ValidationSummary/> *@

@@ -21,7 +21,7 @@ builder.Services.AddScoped(x => (ICookieAuthenticationStateProvider)x.GetRequire
 builder.Services.AddMudServices();
 builder.Services.AddHttpClient(name:Configuration.HttpClientName, options =>
 {
-    options.BaseAddress = new Uri(Configuration.BackendUrl);
+    options.BaseAddress = new Uri("https://localhost:7119/");
 }).AddHttpMessageHandler<CookieHandler>();
 
 builder.Services.AddTransient<IAccountHandler, AccountHandler>();

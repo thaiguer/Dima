@@ -41,7 +41,8 @@ public static class BuilderExtension
             options => options.AddPolicy(
                 ApiConfiguration.CorsPolicyName,
                 policy => policy
-                    .WithOrigins([Configuration.BackendUrl, Configuration.FrontendUrl])
+                    //.WithOrigins([Configuration.BackendUrl, Configuration.FrontendUrl])
+                    .WithOrigins("https://localhost:7218")
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials()

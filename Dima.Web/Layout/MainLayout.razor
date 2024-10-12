@@ -3,17 +3,25 @@
 <MudThemeProvider @bind-IsDarkMode="Configuration.IsDarkMode" Theme="Configuration.Theme" />
 <MudSnackbarProvider />
 
-<MudLayout>
-    <MudAppBar>
-        Dima
+<AuthorizeView>
+    <Authorized>
+        <MudLayout>
+            <MudAppBar>
+                Dima
 
-        <MudSpacer/>
-        <MudSwitch @bind-Value="@Configuration.IsDarkMode"/>
+                <MudSpacer />
+                <MudSwitch @bind-Value="@Configuration.IsDarkMode" />
 
-    </MudAppBar>
-    <MudMainContent>
-        <MudContainer>
-            @Body
-        </MudContainer>
-    </MudMainContent>
-</MudLayout>
+            </MudAppBar>
+            <MudMainContent>
+                <MudContainer>
+                    @Body
+                </MudContainer>
+            </MudMainContent>
+        </MudLayout>
+    </Authorized>
+
+    <NotAuthorized>
+        <LoginRedirect></LoginRedirect>
+    </NotAuthorized>
+</AuthorizeView>
