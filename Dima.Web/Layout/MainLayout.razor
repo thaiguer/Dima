@@ -2,22 +2,47 @@
 
 <MudThemeProvider @bind-IsDarkMode="Configuration.IsDarkMode" Theme="Configuration.Theme" />
 <MudSnackbarProvider />
+<MudPopoverProvider />
+<MudDialogProvider />
 
 <AuthorizeView>
     <Authorized>
         <MudLayout>
+            
             <MudAppBar>
+                <MudIconButton
+                    Icon="@Icons.Material.TwoTone.Menu"
+                    Color="Color.Inherit"
+                    Edge="Edge.Start"
+                    OnClick="() => ToggleDrawer()"/>
+                
                 Dima
 
                 <MudSpacer />
-                <MudSwitch @bind-Value="@Configuration.IsDarkMode" />
+                <MudText>@context.User.Identity.Name</MudText>
+                
+                <MudSwitch
+                    @bind-Value="@Configuration.IsDarkMode"
+                    Color="Color.Inherit"
+                    Class="ma-4"
+                    ThumbIcon="@Icons.Material.TwoTone.LightMode"
+                    />
 
             </MudAppBar>
+            
+            <MudDrawer
+                @bind-Open="@_isDrawerOpen">
+
+                <Dima.Web.Components.NavMenu></Dima.Web.Components.NavMenu>
+
+            </MudDrawer>
+
             <MudMainContent>
-                <MudContainer>
+                <MudContainer Class="mt-4">
                     @Body
                 </MudContainer>
             </MudMainContent>
+
         </MudLayout>
     </Authorized>
 
@@ -25,3 +50,12 @@
         <LoginRedirect></LoginRedirect>
     </NotAuthorized>
 </AuthorizeView>
+
+@code{
+    private bool _isDrawerOpen = true;
+
+    private void ToggleDrawer()
+    {
+        _isDrawerOpen = !_isDrawerOpen;
+    }
+}
