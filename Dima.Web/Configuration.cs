@@ -9,7 +9,8 @@ public static class Configuration
 
     public const string HttpClientName = "dima";
 
-    public static string BackendUrl { get; set; } = "https://localhost:7119";
+    //public static string BackendUrl { get; set; } = "https://localhost:5292";
+    public static string BackendUrl { get; set; } = "https://localhost:5250";
 
     public static MudTheme Theme = new()
     {

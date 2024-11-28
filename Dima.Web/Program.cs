@@ -8,7 +8,8 @@ using Dima.Core.Handlers;
 using Dima.Web.Handlers;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
-Configuration.BackendUrl = builder.Configuration.GetValue<string>("BackendUrl") ?? string.Empty;
+//Configuration.BackendUrl = builder.Configuration.GetValue<string>("BackendUrl") ?? string.Empty;
+Configuration.BackendUrl = "https://localhost:5250/";
 
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
@@ -21,7 +22,7 @@ builder.Services.AddScoped(x => (ICookieAuthenticationStateProvider)x.GetRequire
 builder.Services.AddMudServices();
 builder.Services.AddHttpClient(name:Configuration.HttpClientName, options =>
 {
-    options.BaseAddress = new Uri("https://localhost:7119/");
+    options.BaseAddress = new Uri(Configuration.BackendUrl);
 }).AddHttpMessageHandler<CookieHandler>();
 
 builder.Services.AddTransient<IAccountHandler, AccountHandler>();

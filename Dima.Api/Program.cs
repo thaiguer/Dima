@@ -1,6 +1,7 @@
 using Dima.Api.Endpoints;
 using Dima.Api.Common.Api;
 using Dima.Api;
+using Dima.Core;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.AddConfiguration();
@@ -17,6 +18,7 @@ if(app.Environment.IsDevelopment())
     app.ConfigureDevelopmentEnviroment();
 }
 
+app.Urls.Add(Configuration.BackendUrl);
 app.UseCors(ApiConfiguration.CorsPolicyName);
 app.UseSecurity();
 app.MapEndpoints();
