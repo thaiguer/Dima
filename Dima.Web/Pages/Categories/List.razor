@@ -15,8 +15,7 @@
 <MudDataGrid
     Items="@Categories"
     Filterable="true"
-    QuickFilter="Filter"
-    Hideable="true">
+    QuickFilter="Filter">
     <ToolBarContent>
         <MudSpacer />
         <MudTextField @bind-Value="SearchTerm"
@@ -31,6 +30,21 @@
     <Columns>
         <PropertyColumn Property="x => x.Id.ToString()" />
         <PropertyColumn Property="x => x.Title.ToString()" Title="Categoria"/>
+        <TemplateColumn Class="d-flex justify-center">
+            <CellTemplate>
+                <MudStack Row>
+                    <MudIconButton
+                        Icon="@Icons.Material.Filled.Edit"
+                        Color="Color.Primary"
+                        Href="@($"/categories/edit/{context.Item.Id}")"/>
+                    <MudIconButton
+                        Icon="@Icons.Material.Filled.Delete"
+                        Color="Color.Error"
+                        aria-label="Excluir"
+                        OnClick="() => OnDeleteButtonClickedAsync(context.Item.Id, context.Item.Title)"/>
+                </MudStack>
+            </CellTemplate>
+        </TemplateColumn>
     </Columns>
 </MudDataGrid>
 
