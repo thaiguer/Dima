@@ -15,6 +15,11 @@ public class TransactionHandler (AppDbContext appDbContext): ITransactionHandler
     {
         try
         {
+            if (request is {Type: ETransactionType.Withdraw, Amount: > 0})
+            {
+                request.Amount *= -1;
+            }
+            
             var transaction = new Transaction
             {
                 Title = request.Title,
@@ -41,6 +46,11 @@ public class TransactionHandler (AppDbContext appDbContext): ITransactionHandler
     {
         try
         {
+            if (request is {Type: ETransactionType.Withdraw, Amount: > 0})
+            {
+                request.Amount *= -1;
+            }
+            
             var transaction = await appDbContext
                 .Transactions
                 .FirstOrDefaultAsync(x => x.Id == request.Id && x.UserId == request.UserId);

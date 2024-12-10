@@ -9,7 +9,7 @@ public class CreateTransactionRequest : BaseRequest
     public string Title { get; set; } = string.Empty;
 
     [Required]
-    public ETransactionType Type { get; set; }
+    public ETransactionType Type { get; set; } = ETransactionType.Withdraw;
 
     [Required]
     public decimal Amount { get; set; }
@@ -18,5 +18,5 @@ public class CreateTransactionRequest : BaseRequest
     public long CategoryId { get; set; }
 
     [Required]
-    public DateTime? PaidOrReceivedAt { get; set; }
+    public DateTime? PaidOrReceivedAt { get; set; } = DateTime.Now;
 }
