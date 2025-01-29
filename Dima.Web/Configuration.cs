@@ -18,7 +18,7 @@ public static class Configuration
         {
             Default = new Default
             {
-                FontFamily = ["Raleway", "sans-serif"]
+                FontFamily = ["Mono", "Raleway", "sans-serif"]
             }
         },
 
